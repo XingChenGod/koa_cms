@@ -19,9 +19,6 @@ render(app, {
 
 // 配置路由
 app.use(index);
-// router.get('/', async ctx => {
-//     await ctx.render('default/index')
-// })
 
 app.use(router.routes())
     .use(router.allowedMethods());
