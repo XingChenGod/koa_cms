@@ -1,4 +1,4 @@
-var router=require('koa-router')();
+const router = require('koa-router')();
 
 const user = require('./admin/user'),
       focus = require('./admin/focus'),
