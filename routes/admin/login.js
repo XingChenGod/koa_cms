@@ -16,6 +16,10 @@ router.post('/', async ctx => {
    // const ps = tools.md5(userinfo.password);
    if (userinfo.code.toLowerCase() !== ctx.session.code.toLowerCase()) {
       console.log('验证码错误');
+      ctx.render('admin/error', {
+         message: '验证码错误！',
+         redirect: ctx.state.__HOST__ + '/admin/login'
+      });
       return;
    }
    try {

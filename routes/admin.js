@@ -10,7 +10,7 @@ router.use(async (ctx, next) => {
     // console.log(ctx.request.header.host);
     // 模板引擎配置全局变量
     ctx.state.__HOST__ = 'http://' + ctx.request.header.host;
-    console.log(ctx.url);
+
     // 检测是否登录
     if (ctx.session.userinfo) {
         // 已经登录
@@ -28,6 +28,11 @@ router.use(async (ctx, next) => {
 //配置admin的子路由  层级路由
 router.get('/', async ctx => {
     // await ctx.redirect('/admin/login');
+    // 设置全局用户名
+    ctx.state.userinfo = {
+        username: ctx.session.username,
+        password: ctx.session.password
+    };
     await ctx.render('admin/index');
 });
 
