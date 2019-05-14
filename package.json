@@ -17,6 +17,8 @@
     "koa-router": "^7.4.0",
     "koa-session": "^5.11.0",
     "koa-static": "^5.0.0",
-    "mongodb": "^3.2.4"
+    "md5": "^2.2.1",
+    "mongodb": "^3.2.4",
+    "svg-captcha": "^1.4.0"
   }
 }
