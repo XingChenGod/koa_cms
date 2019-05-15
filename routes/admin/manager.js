@@ -2,17 +2,22 @@
 
 const router = require('koa-router')();
 
+const DB = require('../../module/DB/db');
+
 router.get('/',async ctx => {
-    await ctx.render('admin/user/list');
+    const res = await DB.find('admin');
+    await ctx.render('admin/manager/list', {
+        list: res
+    });
 })
 
 router.get('/add',async ctx => {
-    await ctx.render('admin/user/add');
+    await ctx.render('admin/manager/add');
 })
 
 
 router.get('/edit',async ctx => {
-    await ctx.render('admin/user/edit');
+    await ctx.render('admin/manager/edit');
 })
 
 router.get('/delete',async ctx => {
