@@ -11,20 +11,40 @@ router.get('/', async ctx => {
 });
 
 router.get('/changeStatus', async ctx => {
-    const {collectionName, status, id} = ctx.query;
-    const res = await DB.update(collectionName, {_id: DB.getObjectId(id)}, {
-        status: Number(!Boolean(status * 1))
-    });
-    if (res.result.ok * 1 === 1) {
+    const {collectionName, attr, id} = ctx.query;
+    try {
+        // 先查
+        const res = await DB.find(collectionName, {_id: DB.getObjectId(id)});
+        let json = {};
+        if (res.length > 0) {
+            // 查到了
+            if (res[0][attr] === 1) {
+                json = {
+                    [attr]: 0
+                };
+            } else {
+                json = {
+                    [attr]: 1
+                };
+            }
+        }
+        await DB.update(collectionName, {_id: DB.getObjectId(id)}, json);
         ctx.body = {
             message: '修改状态成功！',
             code: 1
         };
-    } else {
-        ctx.body = {
-            message: '修改状态失败！',
-            code: 0
-        };
+    } catch (e) {
+        if (e.result.ok * 1 === 1) {
+            ctx.body = {
+                message: '修改状态成功！',
+                code: 1
+            };
+        } else {
+            ctx.body = {
+                message: '修改状态失败！',
+                code: 0
+            };
+        }
     }
 })
 

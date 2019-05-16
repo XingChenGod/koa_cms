@@ -14,7 +14,7 @@ router.use(async (ctx, next) => {
     // 模板引擎配置全局变量
     ctx.state.__HOST__ = 'http://' + ctx.request.header.host;
     const pathName = url.parse(ctx.request.url).pathname.substr(1);
-    console.log(pathName);
+    console.log(ctx.method + '--' + pathName);
     const pathArr = pathName.split('/');
     // 设置全局用户名
     ctx.state.G = {

@@ -42,11 +42,15 @@ router.post('/doLogin', async ctx => {
          });
       }
    } catch (err) {
-      console.log(err);
-      ctx.render('admin/error', {
-         message: err,
-         redirect: ctx.state.__HOST__ + '/admin/login'
-      });
+      // console.log(err);
+      if (err.result.ok === 1) {
+         // 更新成功
+      } else {
+         ctx.render('admin/error', {
+            message: err,
+            redirect: ctx.state.__HOST__ + '/admin/login'
+         });
+      }
    }
 });
 
