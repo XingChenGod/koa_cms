@@ -52,7 +52,6 @@ router.post('/doAdd', async ctx => {
     }
 })
 
-
 router.get('/edit',async ctx => {
     await ctx.render('admin/manager/edit');
 })
